@@ -3,10 +3,11 @@ requires = ["setuptools>=64.0.0", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "untdl-harvest"
-description = "Python package for harvesting records from the UNT Digital Library via OAI."
+name = "untdl_harvest"
+description = "Python package for harvesting records from the UNT Digital Library via OAI plus tools for scraping full text from the PDFs."
 readme = "README.md"
 authors = [{ name = "Jason Thomale", email = "jason.thomale@unt.edu"}]
+dynamic = ["version"]
 requires-python = ">=3.7"
 dependencies = []
 
@@ -15,3 +16,6 @@ dev = [
     'pytest >= 6.2.4; python_version >= "3.10"',
     'pytest >= 3.0.0; python_version < "3.10"'
 ]
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
