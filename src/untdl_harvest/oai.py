@@ -32,15 +32,15 @@ class OAIError(Exception):
 class ETreeXmlDoc:
     """Simple wrapper around xml.etree.ElementTree."""
 
-    def __init__(self, etree_node, namespaces):
+    def __init__(self, etree_node, namespaces=None):
         """Initializes an ETreeXmlDoc object."""
         self.root = etree_node
-        self.namespaces = namespaces
-        for prefix, namespace in namespaces.items():
+        self.namespaces = namespaces or {}
+        for prefix, namespace in self.namespaces.items():
             ET.register_namespace(prefix, namespace)
 
     @classmethod
-    def fromstring(cls, xml_str, namespaces):
+    def fromstring(cls, xml_str, namespaces=None):
         """Creates a new ETreeXmlDoc from an XML string."""
         root_node = ET.fromstring(xml_str)
         return cls(root_node, namespaces)
@@ -57,6 +57,10 @@ class ETreeXmlDoc:
 
     def __repr__(self):
         return f"<{type(self).__name__} Root Element '{self.root.tag}'>"
+
+    @property
+    def text(self):
+        return self.root.text
 
     def expand_tagname(self, tagname):
         """Expands a tagname that uses a namespace prefix."""
